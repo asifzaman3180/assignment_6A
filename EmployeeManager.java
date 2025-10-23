@@ -57,6 +57,7 @@ public class EmployeeManager {
         }
     }
 
+    // ✅ Fixed version
     private static void showRandomEmployee() {
         System.out.println("Loading data ...");
         try {
@@ -65,7 +66,8 @@ public class EmployeeManager {
                 System.out.println("No employees found.");
             } else {
                 Random rand = new Random();
-                System.out.println(employees.get(rand.nextInt(employees.size())).trim());
+                String randomEmployee = employees.get(rand.nextInt(employees.size())).trim();
+                System.out.println(randomEmployee);
             }
             System.out.println("Data Loaded.");
         } catch (IOException e) {
@@ -148,7 +150,6 @@ public class EmployeeManager {
             }
             System.out.println("Data Deleted.");
         } catch (IOException e) {
-            //
             System.err.println("Error deleting from file: " + e.getMessage());
         }
     }
