@@ -148,6 +148,7 @@ public class EmployeeManager {
             }
             System.out.println("Data Deleted.");
         } catch (IOException e) {
+            //
             System.err.println("Error deleting from file: " + e.getMessage());
         }
     }
