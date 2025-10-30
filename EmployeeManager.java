@@ -11,12 +11,14 @@ public class EmployeeManager {
                 BufferedReader r = new BufferedReader(
                         new InputStreamReader(
                                 new FileInputStream("employees.txt")));
+
                 String l = r.readLine();
                 String e[] = l.split(",");
                 for (String emp : e) {
                     System.out.println(emp);
                 }
-            } catch (Exception e) {}
+            } 
+            catch (Exception e) {}
             System.out.println("Data Loaded.");
         } else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
