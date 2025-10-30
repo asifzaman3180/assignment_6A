@@ -32,7 +32,8 @@ public class EmployeeManager {
                 Random rand = new Random();
                 int idx = rand.nextInt(e.length);
                 System.out.println(e[idx]);
-            } catch (Exception e) {}
+            } 
+            catch (Exception e) {}
             System.out.println("Data Loaded.");
         } else if (args[0].contains("+")) {
             System.out.println("Loading data ...");
@@ -42,9 +43,11 @@ public class EmployeeManager {
                 String n = args[0].substring(1);
                 w.write(", " + n);
                 w.close();
-            } catch (Exception e) {}
+            } 
+            catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("?")) {
+        } 
+        else if (args[0].contains("?")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -60,9 +63,11 @@ public class EmployeeManager {
                         found = true;
                     }
                 }
-            } catch (Exception e) {}
+            }
+             catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("c")) {
+        }
+         else if (args[0].contains("c")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -83,9 +88,11 @@ public class EmployeeManager {
                     }
                 }
                 System.out.println(count + " word(s) found " + chars.length);
-            } catch (Exception e) {}
+            } 
+            catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("u")) {
+        } 
+        else if (args[0].contains("u")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
