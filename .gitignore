@@ -1,0 +1,6 @@
+
+*.txt
+*.log
+!important.log
+!.gitignore
+	
