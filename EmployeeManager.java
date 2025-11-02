@@ -19,6 +19,13 @@ public class EmployeeManager {
                 }
             } catch (Exception e) {
             }
+
+
+
+
+
+
+
             System.out.println("Data Loaded.");
         } else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
@@ -34,6 +41,22 @@ public class EmployeeManager {
                 System.out.println(e[idx]);
             } catch (Exception e) {
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             System.out.println("Data Loaded.");
         } else if (args[0].contains("+")) {
             System.out.println("Loading data ...");
@@ -61,6 +84,16 @@ public class EmployeeManager {
                         System.out.println("Employee found!");
                         found = true;
                     }
+
+
+
+
+
+
+
+
+
+                    
                 }
             } catch (Exception e) {
             }
