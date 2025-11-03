@@ -7,6 +7,7 @@ public class EmployeeManager {
         // Check arguments
         if(args.length == 0) {
             System.out.println("No argument given, Please give arguments");
+            return;
         }
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
