@@ -6,10 +6,17 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
 
-        // Check arguments
+        //  Step 1: Argument Validation
+        if (args.length != 1) {
+            System.out.println(" Invalid number of arguments!");
+            System.out.println(" Usage: java EmployeeManager [option]");
+            System.out.println("Available options: l, s, +name, ?name, c, uName, dName");
+            return; //
+        }
+
+        //
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
-
             try {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(new FileInputStream("employees.txt"))
@@ -26,7 +33,6 @@ public class EmployeeManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             System.out.println("Data Loaded.");
 
         } else if (args[0].equals("s")) {
