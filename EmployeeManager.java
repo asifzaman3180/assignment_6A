@@ -62,7 +62,9 @@ public class EmployeeManager {
                         found = true;
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception e) 
+            {
+                
             }
             System.out.println("Data Loaded.");
         } else if (args[0].contains("c")) {
