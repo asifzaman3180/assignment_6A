@@ -4,7 +4,21 @@ import java.util.*;
 
 public class EmployeeManager {
     public static void main(String[] args) {
-        // Check arguments
+        // ✅ Argument validation fix (Task #2)
+        if (args.length != 1) {
+            System.out.println("Error: Invalid or missing argument.");
+            System.out.println("Usage:");
+            System.out.println("  java EmployeeManager l          # List all employees");
+            System.out.println("  java EmployeeManager s          # Show a random employee");
+            System.out.println("  java EmployeeManager +Name      # Add new employee");
+            System.out.println("  java EmployeeManager ?Name      # Search employee");
+            System.out.println("  java EmployeeManager c          # Count employees");
+            System.out.println("  java EmployeeManager uName      # Update employee");
+            System.out.println("  java EmployeeManager dName      # Delete employee");
+            return;
+        }
+
+        // Original code below
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
@@ -26,7 +40,6 @@ public class EmployeeManager {
                         new InputStreamReader(
                                 new FileInputStream("employees.txt")));
                 String l = r.readLine();
-                System.out.println(l);
                 String e[] = l.split(",");
                 Random rand = new Random();
                 int idx = rand.nextInt(e.length);
@@ -55,36 +68,28 @@ public class EmployeeManager {
                 String e[] = l.split(",");
                 boolean found = false;
                 String s = args[0].substring(1);
-                for (int i = 0; i < e.length && !found; i++) {
-                    if (e[i].equals(s)) {
+                for (String emp : e) {
+                    if (emp.equals(s)) {
                         System.out.println("Employee found!");
                         found = true;
+                        break;
                     }
+                }
+                if (!found) {
+                    System.out.println("Employee not found!");
                 }
             } catch (Exception e) {
             }
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("c")) {
+        } else if (args[0].equals("c")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
                         new InputStreamReader(
                                 new FileInputStream("employees.txt")));
                 String l = r.readLine();
-                char[] chars = l.toCharArray();
-                boolean inWord = false;
-                int count = 0;
-                for (char c : chars) {
-                    if (c == ' ') {
-                        if (!inWord) {
-                            count++;
-                            inWord = true;
-                        } else {
-                            inWord = false;
-                        }
-                    }
-                }
-                System.out.println(count + " word(s) found " + chars.length);
+                String e[] = l.split(",");
+                System.out.println(e.length + " employee(s) found.");
             } catch (Exception e) {
             }
             System.out.println("Data Loaded.");
@@ -127,6 +132,10 @@ public class EmployeeManager {
             } catch (Exception e) {
             }
             System.out.println("Data Deleted.");
+        } else {
+            // ✅ Handle invalid commands too
+            System.out.println("Error: Unsupported command '" + args[0] + "'.");
+            System.out.println("Run the program without arguments to see usage info.");
         }
     }
 }
