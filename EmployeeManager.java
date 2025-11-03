@@ -9,8 +9,7 @@ public class EmployeeManager {
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader r = new BufferedReader(
-                new InputStreamReader(new FileInputStream("employees.txt")));
+                BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("employees.txt")));
                 String l = r.readLine();
                 String e[] = l.split(",");
                 for (String emp : e) {
