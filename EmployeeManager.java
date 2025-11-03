@@ -4,7 +4,21 @@ import java.util.*;
 
 public class EmployeeManager {
     public static void main(String[] args) {
-        // Check arguments
+        // Validate command-line arguments
+        if (args.length != 1) {
+            System.out.println("Error: Invalid number of arguments.");
+            System.out.println("Usage:");
+            System.out.println("  java EmployeeManager l   -> List employees");
+            System.out.println("  java EmployeeManager s   -> Show random employee");
+            System.out.println("  java EmployeeManager +name -> Add new employee");
+            System.out.println("  java EmployeeManager ?name -> Search for employee");
+            System.out.println("  java EmployeeManager c   -> Count words");
+            System.out.println("  java EmployeeManager uname -> Update employee");
+            System.out.println("  java EmployeeManager dname -> Delete employee");
+            return;
+        }
+
+        // Main operations
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
@@ -127,6 +141,9 @@ public class EmployeeManager {
             } catch (Exception e) {
             }
             System.out.println("Data Deleted.");
+        } else {
+            System.out.println("Error: Invalid command argument.");
+            System.out.println("Use one of the following: l, s, +name, ?name, c, uname, dname");
         }
     }
 }
