@@ -5,6 +5,14 @@ import java.util.*;
 public class EmployeeManager {
     public static void main(String[] args) {
         // Check arguments
+	//
+	//checks if code has valid argument
+	if(args.length<1){
+            System.out.println("this is not valid argument ");
+	    System.exit(0);
+
+	}
+	//prints list of employees
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
@@ -21,7 +29,7 @@ public class EmployeeManager {
 	    catch (Exception e) {}
             System.out.println("Data Loaded.");
         } 
-
+        //prints random data
 	else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
             try {
