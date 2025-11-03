@@ -4,8 +4,31 @@ import java.util.*;
 
 public class EmployeeManager {
     public static void main(String[] args) {
+        // Validate command line arguments
+        if (args.length != 1) {
+            System.out.println("Error: Invalid number of arguments.");
+            System.out.println("Usage: java EmployeeManager <command>");
+            System.out.println("Commands:");
+            System.out.println("  l - List all employees");
+            System.out.println("  s - Show random employee");
+            System.out.println("  +<name> - Add new employee");
+            System.out.println("  ?<name> - Search for employee");
+            System.out.println("  c - Count words and characters");
+            System.out.println("  u<name> - Update employee");
+            System.out.println("  d<name> - Delete employee");
+            return;
+        }
+
+        // Check if command is valid
+        String command = args[0];
+        if (!isValidCommand(command)) {
+            System.out.println("Error: Invalid command format.");
+            System.out.println("Valid commands: l, s, +<name>, ?<name>, c, u<name>, d<name>");
+            return;
+        }
+
         // Check arguments
-        if (args[0].equals("l")) {
+        if (command.equals("l")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader reader = new BufferedReader(
@@ -24,7 +47,7 @@ public class EmployeeManager {
             }
             System.out.println("Data Loaded.");
             
-        } else if (args[0].equals("s")) {
+        } else if (command.equals("s")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader reader = new BufferedReader(
@@ -44,12 +67,18 @@ public class EmployeeManager {
             }
             System.out.println("Data Loaded.");
             
-        } else if (args[0].contains("+")) {
+        } else if (command.contains("+")) {
             System.out.println("Loading data ...");
             try {
+                // Validate that there's a name after the + symbol
+                if (command.length() <= 1) {
+                    System.out.println("Error: Missing employee name after '+'");
+                    return;
+                }
+                
                 BufferedWriter writer = new BufferedWriter(
                     new FileWriter("employees.txt", true));
-                String newEmployee = args[0].substring(1);
+                String newEmployee = command.substring(1);
                 writer.write(", " + newEmployee);
                 writer.close();
             } catch (Exception e) {
@@ -57,16 +86,22 @@ public class EmployeeManager {
             }
             System.out.println("Data Loaded.");
             
-        } else if (args[0].contains("?")) {
+        } else if (command.contains("?")) {
             System.out.println("Loading data ...");
             try {
+                // Validate that there's a name after the ? symbol
+                if (command.length() <= 1) {
+                    System.out.println("Error: Missing employee name after '?'");
+                    return;
+                }
+                
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
                         new FileInputStream("employees.txt")));
                 String line = reader.readLine();
                 String[] employees = line.split(",");
                 boolean found = false;
-                String searchName = args[0].substring(1);
+                String searchName = command.substring(1);
                 
                 for (int i = 0; i < employees.length && !found; i++) {
                     if (employees[i].equals(searchName)) {
@@ -75,13 +110,17 @@ public class EmployeeManager {
                     }
                 }
                 
+                if (!found) {
+                    System.out.println("Employee not found!");
+                }
+                
                 reader.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             System.out.println("Data Loaded.");
             
-        } else if (args[0].contains("c")) {
+        } else if (command.contains("c")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader reader = new BufferedReader(
@@ -110,20 +149,34 @@ public class EmployeeManager {
             }
             System.out.println("Data Loaded.");
             
-        } else if (args[0].contains("u")) {
+        } else if (command.contains("u")) {
             System.out.println("Loading data ...");
             try {
+                // Validate that there's a name after the u symbol
+                if (command.length() <= 1) {
+                    System.out.println("Error: Missing employee name after 'u'");
+                    return;
+                }
+                
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
                         new FileInputStream("employees.txt")));
                 String line = reader.readLine();
                 String[] employees = line.split(",");
-                String targetName = args[0].substring(1);
+                String targetName = command.substring(1);
+                boolean updated = false;
                 
                 for (int i = 0; i < employees.length; i++) {
                     if (employees[i].equals(targetName)) {
                         employees[i] = "Updated";
+                        updated = true;
                     }
+                }
+                
+                if (!updated) {
+                    System.out.println("Employee not found for update!");
+                    reader.close();
+                    return;
                 }
                 
                 BufferedWriter writer = new BufferedWriter(
@@ -136,18 +189,30 @@ public class EmployeeManager {
             }
             System.out.println("Data Updated.");
             
-        } else if (args[0].contains("d")) {
+        } else if (command.contains("d")) {
             System.out.println("Loading data ...");
             try {
+                // Validate that there's a name after the d symbol
+                if (command.length() <= 1) {
+                    System.out.println("Error: Missing employee name after 'd'");
+                    return;
+                }
+                
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
                         new FileInputStream("employees.txt")));
                 String line = reader.readLine();
                 String[] employees = line.split(",");
-                String targetName = args[0].substring(1);
+                String targetName = command.substring(1);
                 
                 List<String> employeeList = new ArrayList<>(Arrays.asList(employees));
-                employeeList.remove(targetName);
+                boolean removed = employeeList.remove(targetName);
+                
+                if (!removed) {
+                    System.out.println("Employee not found for deletion!");
+                    reader.close();
+                    return;
+                }
                 
                 BufferedWriter writer = new BufferedWriter(
                     new FileWriter("employees.txt"));
@@ -159,5 +224,29 @@ public class EmployeeManager {
             }
             System.out.println("Data Deleted.");
         }
+    }
+    
+    /**
+     * Validates if the command format is correct
+     * @param command the command string to validate
+     * @return true if command is valid, false otherwise
+     */
+    private static boolean isValidCommand(String command) {
+        if (command == null || command.isEmpty()) {
+            return false;
+        }
+        
+        // Single character commands
+        if (command.equals("l") || command.equals("s") || command.equals("c")) {
+            return true;
+        }
+        
+        // Commands with parameters (must have at least 2 characters)
+        if (command.startsWith("+") || command.startsWith("?") || 
+            command.startsWith("u") || command.startsWith("d")) {
+            return command.length() >= 2;
+        }
+        
+        return false;
     }
 }
