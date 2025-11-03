@@ -4,6 +4,10 @@ import java.util.*;
 
 public class EmployeeManager {
     public static void main(String[] args) {
+        if(args.length() == 0){
+            System.out.print("No arguments");
+            return;
+        }
         // Check arguments
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
