@@ -6,15 +6,14 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
 
-        //  Step 1: Argument Validation
+        // 
         if (args.length != 1) {
             System.out.println(" Invalid number of arguments!");
-            System.out.println(" Usage: java EmployeeManager [option]");
+            System.out.println("Usage: java EmployeeManager [option]");
             System.out.println("Available options: l, s, +name, ?name, c, uName, dName");
-            return; //
+            return;
         }
 
-        //
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
@@ -25,18 +24,18 @@ public class EmployeeManager {
                 String line = reader.readLine();
                 String[] employees = line.split(",");
 
-                for (String emp : employees) {
-                    System.out.println(emp.trim());
+                for (String employee : employees) {
+                    System.out.println(employee.trim());
                 }
 
                 reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
+
             System.out.println("Data Loaded.");
 
         } else if (args[0].equals("s")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -47,19 +46,18 @@ public class EmployeeManager {
                 String line = reader.readLine();
                 String[] employees = line.split(",");
 
-                Random rand = new Random();
-                int index = rand.nextInt(employees.length);
-                System.out.println(employees[index].trim());
+                Random random = new Random();
+                int randomIndex = random.nextInt(employees.length);
+                System.out.println(employees[randomIndex].trim());
 
                 reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Loaded.");
 
         } else if (args[0].contains("+")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -70,14 +68,13 @@ public class EmployeeManager {
                 String newEmployee = args[0].substring(1);
                 writer.write(", " + newEmployee);
                 writer.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Loaded.");
 
         } else if (args[0].contains("?")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -91,8 +88,8 @@ public class EmployeeManager {
                 boolean found = false;
                 String searchName = args[0].substring(1);
 
-                for (String emp : employees) {
-                    if (emp.trim().equals(searchName)) {
+                for (String employee : employees) {
+                    if (employee.trim().equals(searchName)) {
                         System.out.println("Employee found!");
                         found = true;
                         break;
@@ -100,14 +97,13 @@ public class EmployeeManager {
                 }
 
                 reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Loaded.");
 
         } else if (args[0].contains("c")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -116,15 +112,15 @@ public class EmployeeManager {
                 );
 
                 String line = reader.readLine();
-                char[] chars = line.toCharArray();
+                char[] characters = line.toCharArray();
 
                 boolean inWord = false;
-                int count = 0;
+                int wordCount = 0;
 
-                for (char c : chars) {
-                    if (c == ' ') {
+                for (char character : characters) {
+                    if (character == ' ') {
                         if (!inWord) {
-                            count++;
+                            wordCount++;
                             inWord = true;
                         } else {
                             inWord = false;
@@ -132,16 +128,15 @@ public class EmployeeManager {
                     }
                 }
 
-                System.out.println(count + " word(s) found " + chars.length);
+                System.out.println(wordCount + " word(s) found " + characters.length);
                 reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Loaded.");
 
         } else if (args[0].contains("u")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -163,14 +158,14 @@ public class EmployeeManager {
                 writer.write(String.join(",", employees));
                 writer.close();
                 reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Updated.");
 
         } else if (args[0].contains("d")) {
-
             System.out.println("Loading data ...");
 
             try {
@@ -190,8 +185,8 @@ public class EmployeeManager {
                 writer.close();
                 reader.close();
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             System.out.println("Data Deleted.");
