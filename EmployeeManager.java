@@ -4,8 +4,26 @@ import java.util.*;
 
 public class EmployeeManager {
     public static void main(String[] args) {
-        // Check arguments
-        if (args[0].equals("l")) {
+        // Validate command-line arguments
+        if (args.length != 1) {
+            System.out.println("Error: Invalid number of arguments");
+            System.out.println("Usage: java EmployeeManager [l|s]");
+            System.out.println("  l - List all employees");
+            System.out.println("  s - Select a random employee");
+            return;
+        }
+
+        String command = args[0];
+        if (!command.equals("l") && !command.equals("s")) {
+            System.out.println("Error: Invalid argument");
+            System.out.println("Usage: java EmployeeManager [l|s]");
+            System.out.println("  l - List all employees");
+            System.out.println("  s - Select a random employee");
+            return;
+        }
+
+        // Process commands
+        if (command.equals("l")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
