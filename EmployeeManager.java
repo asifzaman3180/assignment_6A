@@ -5,6 +5,20 @@ import java.util.*;
 public class EmployeeManager {
     public static void main(String[] args) {
 
+        // ✅ Argument validation (Task #2)
+        if (args.length != 1) {
+            System.out.println("Invalid number of arguments.");
+            System.out.println("Usage:");
+            System.out.println("  java EmployeeManager l        -> List all employees");
+            System.out.println("  java EmployeeManager s        -> Show random employee");
+            System.out.println("  java EmployeeManager +Name    -> Add new employee");
+            System.out.println("  java EmployeeManager ?Name    -> Search for employee");
+            System.out.println("  java EmployeeManager c        -> Count words and characters");
+            System.out.println("  java EmployeeManager uName    -> Update employee");
+            System.out.println("  java EmployeeManager dName    -> Delete employee");
+            return; // Prevent program from running further
+        }
+
         // Check arguments
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
@@ -173,6 +187,11 @@ public class EmployeeManager {
                 e.printStackTrace();
             }
             System.out.println("Data Deleted.");
+
+        } else {
+            // ✅ Handle invalid command
+            System.out.println("Invalid command. Use one of the following:");
+            System.out.println("l, s, +Name, ?Name, c, uName, dName");
         }
     }
 }
