@@ -18,7 +18,8 @@ public class EmployeeManager {
                 }
             } catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].equals("s")) {
+        } 
+        else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -32,7 +33,8 @@ public class EmployeeManager {
                 System.out.println(e[idx]);
             } catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("+")) {
+        } 
+        else if (args[0].contains("+")) {
             System.out.println("Loading data ...");
             try {
                 BufferedWriter w = new BufferedWriter(
@@ -42,7 +44,8 @@ public class EmployeeManager {
                 w.close();
             } catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("?")) {
+        } 
+        else if (args[0].contains("?")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -60,7 +63,8 @@ public class EmployeeManager {
                 }
             } catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("c")) {
+        } 
+        else if (args[0].contains("c")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -83,7 +87,8 @@ public class EmployeeManager {
                 System.out.println(count + " word(s) found " + chars.length);
             } catch (Exception e) {}
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("u")) {
+        } 
+        else if (args[0].contains("u")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
@@ -103,7 +108,8 @@ public class EmployeeManager {
                 w.close();
             } catch (Exception e) {}
             System.out.println("Data Updated.");
-        } else if (args[0].contains("d")) {
+        } 
+        else if (args[0].contains("d")) {
             System.out.println("Loading data ...");
             try {
                 BufferedReader r = new BufferedReader(
