@@ -6,6 +6,13 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
 
+        // ✅ Task #2: Argument validation to prevent early termination
+        if (args.length != 1) {
+            System.out.println("Error: Invalid number of arguments.");
+            System.out.println("Usage: java EmployeeManager [l | s | +name | ?name | c | u | dname]");
+            return; // Stop execution safely
+        }
+
         // Check arguments
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
