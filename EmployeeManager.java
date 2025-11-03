@@ -19,8 +19,12 @@ public class EmployeeManager {
             } 
             catch (Exception e) 
             {
-                
+
             }
+
+
+            //hi
+            
             System.out.println("Data Loaded.");
         } else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
