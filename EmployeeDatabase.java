@@ -1,65 +1,78 @@
-// File Name: EmployeeDatabase.java
-import java.io.*;
-import java.util.*;
+// File Name: EmployeeManager.java
+import java.io.IOException;
 
-public class EmployeeDatabase {
+public class EmployeeManager {
 
-    private static final String FILE_NAME = "employees.txt";
-
-    public static List<String> readEmployees() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
-        String line = reader.readLine();
-        reader.close();
-        if (line == null || line.isEmpty()) return new ArrayList<>();
-        return new ArrayList<>(Arrays.asList(line.split(",")));
-    }
-
-    public static void writeEmployees(List<String> employees) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
-        writer.write(String.join(",", employees));
-        writer.close();
-    }
-
-    public static void addEmployee(String name) throws IOException {
-        List<String> employees = readEmployees();
-        employees.add(name.trim());
-        writeEmployees(employees);
-    }
-
-    public static boolean searchEmployee(String name) throws IOException {
-        List<String> employees = readEmployees();
-        return employees.contains(name.trim());
-    }
-
-    public static void updateEmployee(String name) throws IOException {
-        List<String> employees = readEmployees();
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).trim().equals(name)) {
-                employees.set(i, "Updated");
-            }
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("No command provided. Use: l, s, +name, ?name, uName, dName, c");
+            return;
         }
-        writeEmployees(employees);
+
+        String command = args[0];
+
+        try {
+            switch (command.charAt(0)) {
+                case 'l':
+                    listEmployees();
+                    break;
+                case 's':
+                    showRandomEmployee();
+                    break;
+                case '+':
+                    EmployeeDatabase.addEmployee(command.substring(1));
+                    System.out.println("Employee Added.");
+                    break;
+                case '?':
+                    searchEmployee(command.substring(1));
+                    break;
+                case 'u':
+                    EmployeeDatabase.updateEmployee(command.substring(1));
+                    System.out.println("Data Updated.");
+                    break;
+                case 'd':
+                    EmployeeDatabase.deleteEmployee(command.substring(1));
+                    System.out.println("Data Deleted.");
+                    break;
+                case 'c':
+                    countWordsAndChars();
+                    break;
+                default:
+                    System.out.println("Unknown command: " + command);
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    public static void deleteEmployee(String name) throws IOException {
-        List<String> employees = readEmployees();
-        employees.removeIf(emp -> emp.trim().equals(name));
-        writeEmployees(employees);
+    private static void listEmployees() throws IOException {
+        System.out.println("Loading data...");
+        for (String emp : EmployeeDatabase.readEmployees()) {
+            System.out.println(emp.trim());
+        }
+        System.out.println("Data Loaded.");
     }
 
-    public static int[] countWordsAndChars() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
-        String line = reader.readLine();
-        reader.close();
-        if (line == null) return new int[]{0, 0};
-        String[] words = line.split(",");
-        return new int[]{words.length, line.length()};
+    private static void showRandomEmployee() throws IOException {
+        System.out.println("Loading data...");
+        String emp = EmployeeDatabase.getRandomEmployee();
+        if (emp != null) {
+            System.out.println("Random Employee: " + emp);
+        } else {
+            System.out.println("No employees found.");
+        }
+        System.out.println("Data Loaded.");
     }
 
-    public static String getRandomEmployee() throws IOException {
-        List<String> employees = readEmployees();
-        if (employees.isEmpty()) return null;
-        Random rand = new Random();
-        return employees.get(rand.nextInt(employees.size())).trim();
+    private static void searchEmployee(String name) throws IOException {
+        System.out.println("Searching employee...");
+        boolean found = EmployeeDatabase.searchEmployee(name);
+        System.out.println(found ? "Employee found!" : "Employee not found.");
+        System.out.println("Search Complete.");
+    }
+
+    private static void countWordsAndChars() throws IOException {
+        int[] count = EmployeeDatabase.countWordsAndChars();
+        System.out.println(count[0] + " word(s), " + count[1] + " character(s) found.");
     }
 }
